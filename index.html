@@ -1848,6 +1848,22 @@
       font-size: 1.4rem;
     }
 
+    .duo-hearts.empty {
+      animation: heartPulseWarn 1.4s ease-in-out infinite;
+    }
+
+    @keyframes heartPulseWarn {
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.12);
+      }
+    }
+
     .duo-level-badge {
       background: linear-gradient(135deg, var(--blue-main), var(--blue-dark));
       color: white;
@@ -3330,10 +3346,12 @@
       z-index: 2000;
       background: linear-gradient(160deg, #1a4b8c 0%, #2563eb 55%, #0ea5e9 100%);
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: center;
       padding: 16px;
       transition: opacity .45s, transform .45s;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
     }
 
     #login-screen.hide {
@@ -3351,7 +3369,9 @@
       box-shadow: 0 24px 80px rgba(0, 0, 0, .28);
       animation: bounceIn .5s ease;
       position: relative;
-      overflow: hidden;
+      overflow: visible;
+      margin: auto 0;
+      flex-shrink: 0;
     }
 
     .auth-card::before {
@@ -3757,6 +3777,199 @@
     .btn-logout:hover {
       background: #fee2e2;
     }
+
+    /* ── User menu action buttons ── */
+    .user-menu-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      margin-bottom: 10px;
+    }
+
+    .btn-user-action {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 14px;
+      border: 2px solid transparent;
+      font-weight: 800;
+      font-size: .88rem;
+      cursor: pointer;
+      font-family: 'Nunito', sans-serif;
+      transition: all .15s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-align: left;
+    }
+
+    .btn-user-action.edit-name {
+      background: #eff6ff;
+      border-color: #bfdbfe;
+      color: var(--blue-dark);
+    }
+
+    .btn-user-action.edit-name:hover {
+      background: #dbeafe;
+    }
+
+    .btn-user-action.edit-pass {
+      background: #f5f3ff;
+      border-color: #ddd6fe;
+      color: #4c1d95;
+    }
+
+    .btn-user-action.edit-pass:hover {
+      background: #ede9fe;
+    }
+
+    .btn-user-action.reset-game {
+      background: #fff7ed;
+      border-color: #fed7aa;
+      color: #9a3412;
+    }
+
+    .btn-user-action.reset-game:hover {
+      background: #ffedd5;
+    }
+
+    .user-menu-divider {
+      height: 1px;
+      background: #f1f5f9;
+      margin: 6px 0;
+    }
+
+    /* ── Edit modal overlay (ganti nama/password) ── */
+    .edit-modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background: rgba(15, 23, 42, 0.55);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .edit-modal-overlay.show {
+      display: flex;
+    }
+
+    .edit-modal-box {
+      background: white;
+      border-radius: 24px;
+      padding: 24px 20px 20px;
+      width: 100%;
+      max-width: 360px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, .25);
+      animation: bounceIn .3s ease;
+    }
+
+    .edit-modal-title {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.4rem;
+      color: var(--blue-dark);
+      margin-bottom: 4px;
+      text-align: center;
+    }
+
+    .edit-modal-sub {
+      font-size: .8rem;
+      font-weight: 700;
+      color: #94a3b8;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .edit-modal-field {
+      margin-bottom: 12px;
+    }
+
+    .edit-modal-label {
+      display: block;
+      font-size: .78rem;
+      font-weight: 800;
+      color: #64748b;
+      margin-bottom: 5px;
+    }
+
+    .edit-modal-input {
+      width: 100%;
+      padding: 11px 14px;
+      border-radius: 12px;
+      border: 2px solid #e2e8f0;
+      font-family: 'Nunito', sans-serif;
+      font-size: .95rem;
+      font-weight: 700;
+      outline: none;
+      transition: border-color .15s;
+      box-sizing: border-box;
+    }
+
+    .edit-modal-input:focus {
+      border-color: var(--blue-main);
+    }
+
+    .edit-modal-msg {
+      font-size: .78rem;
+      font-weight: 800;
+      padding: 7px 12px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      display: none;
+    }
+
+    .edit-modal-msg.err {
+      background: #fef2f2;
+      color: #b91c1c;
+      display: block;
+    }
+
+    .edit-modal-msg.ok {
+      background: #f0fdf4;
+      color: #15803d;
+      display: block;
+    }
+
+    .edit-modal-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .btn-edit-save {
+      flex: 1;
+      padding: 11px;
+      border-radius: 14px;
+      border: none;
+      background: linear-gradient(135deg, var(--blue-main), var(--blue-dark));
+      color: white;
+      font-family: 'Fredoka One', cursive;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 4px 0 var(--blue-dark);
+      transition: transform .1s;
+    }
+
+    .btn-edit-save:active {
+      transform: translateY(2px);
+    }
+
+    .btn-edit-cancel {
+      padding: 11px 18px;
+      border-radius: 14px;
+      border: 2px solid #e2e8f0;
+      background: #f8fafc;
+      color: #64748b;
+      font-family: 'Fredoka One', cursive;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all .15s;
+    }
+
+    .btn-edit-cancel:hover {
+      background: #e2e8f0;
+    }
   </style>
 </head>
 
@@ -3765,7 +3978,6 @@
   <!-- ═══ AUTH SCREEN ═══ -->
   <div id="login-screen">
     <div class="auth-card">
-      <span class="auth-logo">🌈</span>
       <div class="auth-title">BelajarYuk!</div>
       <div class="auth-sub">Platform belajar seru untuk anak usia 3–5 tahun</div>
 
@@ -3875,7 +4087,102 @@
         <span class="user-stat-label">Streak</span>
       </div>
     </div>
+
+    <div class="user-menu-divider"></div>
+    <div class="user-menu-actions">
+      <button class="btn-user-action edit-name" onclick="openEditName()">
+        ✏️ Ganti Username
+      </button>
+      <button class="btn-user-action edit-pass" onclick="openEditPass()">
+        🔒 Ganti Password
+      </button>
+      <button class="btn-user-action reset-game" onclick="openResetGame()">
+        🔄 Reset Progress Game
+      </button>
+    </div>
+    <div class="user-menu-divider"></div>
     <button class="btn-logout" onclick="logoutUser()">🚪 Keluar</button>
+  </div>
+
+  <!-- ═══ EDIT NAME MODAL ═══ -->
+  <div class="edit-modal-overlay" id="editNameOverlay" onclick="if(event.target===this)closeEditModals()">
+    <div class="edit-modal-box">
+      <div class="edit-modal-title">✏️ Ganti Username</div>
+      <div class="edit-modal-sub">Masukkan nama baru kamu</div>
+      <div class="edit-modal-msg" id="editNameMsg"></div>
+      <div class="edit-modal-field">
+        <label class="edit-modal-label">👤 Nama Baru</label>
+        <input class="edit-modal-input" id="editNameInput" type="text" placeholder="Nama lengkap baru" maxlength="40">
+      </div>
+      <div class="edit-modal-actions">
+        <button class="btn-edit-cancel" onclick="closeEditModals()">Batal</button>
+        <button class="btn-edit-save" onclick="saveEditName()">💾 Simpan</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ EDIT PASSWORD MODAL ═══ -->
+  <div class="edit-modal-overlay" id="editPassOverlay" onclick="if(event.target===this)closeEditModals()">
+    <div class="edit-modal-box">
+      <div class="edit-modal-title">🔒 Ganti Password</div>
+      <div class="edit-modal-sub">Masukkan password lama dan baru</div>
+      <div class="edit-modal-msg" id="editPassMsg"></div>
+      <div class="edit-modal-field">
+        <label class="edit-modal-label">🔑 Password Lama</label>
+        <div class="pw-wrap">
+          <input class="edit-modal-input" id="editPassOld" type="password" placeholder="Password saat ini">
+          <button class="pw-toggle" type="button" onclick="togglePw('editPassOld',this)">👁️</button>
+        </div>
+      </div>
+      <div class="edit-modal-field">
+        <label class="edit-modal-label">🔒 Password Baru</label>
+        <div class="pw-wrap">
+          <input class="edit-modal-input" id="editPassNew" type="password" placeholder="Minimal 6 karakter">
+          <button class="pw-toggle" type="button" onclick="togglePw('editPassNew',this)">👁️</button>
+        </div>
+      </div>
+      <div class="edit-modal-field">
+        <label class="edit-modal-label">🔒 Konfirmasi Password Baru</label>
+        <div class="pw-wrap">
+          <input class="edit-modal-input" id="editPassNew2" type="password" placeholder="Ulangi password baru">
+          <button class="pw-toggle" type="button" onclick="togglePw('editPassNew2',this)">👁️</button>
+        </div>
+      </div>
+      <div class="edit-modal-actions">
+        <button class="btn-edit-cancel" onclick="closeEditModals()">Batal</button>
+        <button class="btn-edit-save"
+          style="background:linear-gradient(135deg,#7c3aed,#4c1d95);box-shadow:0 4px 0 #4c1d95"
+          onclick="saveEditPass()">💾 Simpan</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ RESET GAME MODAL ═══ -->
+  <div class="edit-modal-overlay" id="resetGameOverlay" onclick="if(event.target===this)closeEditModals()">
+    <div class="edit-modal-box">
+      <div style="text-align:center;font-size:2.8rem;margin-bottom:6px">⚠️</div>
+      <div class="edit-modal-title" style="color:#b91c1c">Reset Progress Game</div>
+      <div class="edit-modal-sub">Semua poin, bintang, dan progress akan dihapus!</div>
+      <div
+        style="background:#fef2f2;border:2px solid #fca5a5;border-radius:14px;padding:12px 14px;margin:10px 0 16px;font-size:.82rem;font-weight:700;color:#7f1d1d;text-align:center">
+        🎮 Skor &amp; Streak → 0<br>
+        ⭐ Bintang → 0<br>
+        🗺️ Babak Petualangan → direset<br>
+        📊 Progress semua game → 0%
+      </div>
+      <div class="edit-modal-msg" id="resetGameMsg"></div>
+      <div class="edit-modal-field">
+        <label class="edit-modal-label">🔑 Ketik <b style="color:#b91c1c">RESET</b> untuk konfirmasi</label>
+        <input class="edit-modal-input" id="resetConfirmInput" type="text" placeholder="Ketik RESET di sini"
+          style="border-color:#fca5a5">
+      </div>
+      <div class="edit-modal-actions">
+        <button class="btn-edit-cancel" onclick="closeEditModals()">Batal</button>
+        <button class="btn-edit-save"
+          style="background:linear-gradient(135deg,#ef4444,#b91c1c);box-shadow:0 4px 0 #b91c1c"
+          onclick="saveResetGame()">🔄 Reset Sekarang</button>
+      </div>
+    </div>
   </div>
 
   <!-- Clouds -->
@@ -4552,15 +4859,26 @@
       tulis: 26,  // 26 huruf A-Z untuk ditulis
     };
 
-    // Simpan di localStorage agar persisten
+    // Simpan di localStorage per-user agar reset game bisa menghapus progress
+    function getProgressKey() {
+      // Pakai currentUser.id jika sudah login, fallback ke 'guest'
+      try {
+        var uid = (typeof currentUser !== 'undefined' && currentUser && currentUser.id)
+          ? currentUser.id : 'guest';
+        return 'belajaryuk_' + uid + '_progress';
+      } catch (e) { return 'belajaryuk_guest_progress'; }
+    }
     function loadProgress() {
       try {
-        const saved = localStorage.getItem('belajarYukProgress');
+        // Coba key baru dulu, fallback ke key lama agar data lama tidak hilang
+        var key = getProgressKey();
+        var saved = localStorage.getItem(key);
+        if (!saved) saved = localStorage.getItem('belajarYukProgress');
         return saved ? JSON.parse(saved) : {};
       } catch (e) { return {}; }
     }
     function saveProgress(prog) {
-      try { localStorage.setItem('belajarYukProgress', JSON.stringify(prog)); } catch (e) { }
+      try { localStorage.setItem(getProgressKey(), JSON.stringify(prog)); } catch (e) { }
     }
 
     let gameProgress = loadProgress();
@@ -5063,100 +5381,57 @@
     // prosody variasi, ibu + bapak bergantian
     // ══════════════════════════════════════════════
 
-    let voiceIbu = null;   // suara perempuan (Ibu Guru)
-    let voiceAyah = null;  // suara laki-laki (Pak Guru)
-    let useIbu = true;     // bergantian tiap soal
+    // ══════════════════════════════════════════════
+    // 🎙️ VOICE ENGINE — Satu suara terbaik, natural
+    // ══════════════════════════════════════════════
+
+    let bestVoice = null;
     let voicesReady = false;
 
-    // ── Skor kualitas suara (makin tinggi makin natural) ──
+    // Skor kualitas suara (makin tinggi makin natural)
     function scoreVoice(v) {
       let s = 0;
       const n = v.name.toLowerCase();
       const l = v.lang.toLowerCase();
-      // Bahasa Indonesia = nilai tertinggi
       if (l === 'id-id' || l === 'id_id') s += 100;
       else if (l.startsWith('id')) s += 80;
-      else if (l.startsWith('ms')) s += 60;   // Melayu mirip Indonesia
-      // Suara premium browser (Google, Microsoft Neural, Apple)
+      else if (l.startsWith('ms')) s += 60;
       if (n.includes('google')) s += 30;
       if (n.includes('neural') || n.includes('natural')) s += 25;
       if (n.includes('microsoft')) s += 20;
       if (n.includes('premium') || n.includes('enhanced')) s += 20;
-      // Jika tidak ada bahasa Indonesia, pilih English (lebih mulus dari bahasa lain)
       if (l.startsWith('en')) s += 10;
-      // Hindari suara compact/basic (biasanya lebih robot)
       if (n.includes('compact')) s -= 15;
       if (n.includes('espeak') || n.includes('festival')) s -= 40;
       return s;
     }
 
-    function pickGender(voices, wantFemale) {
-      const n = (v) => v.name.toLowerCase();
-      // Deteksi gender dari nama suara
-      const femaleKeywords = ['female', 'woman', 'girl', 'zira', 'samantha', 'victoria', 'karen', 'moira',
-        'tessa', 'fiona', 'veena', 'allison', 'ava', 'susan', 'nicky', 'siri', 'google us english',
-        'microsoft zira', 'microsoft aria', 'microsoft jenny', 'sri', 'damayanti', 'andika'];
-      const maleKeywords = ['male', 'man', 'boy', 'david', 'mark', 'daniel', 'lee', 'rishi',
-        'microsoft david', 'microsoft mark', 'microsoft james', 'google uk english male', 'fred',
-        'alex', 'tom', 'jorge'];
-
-      let candidates;
-      if (wantFemale) {
-        candidates = voices.filter(v => femaleKeywords.some(k => n(v).includes(k)));
-        if (!candidates.length) candidates = voices.filter(v => !maleKeywords.some(k => n(v).includes(k)));
-      } else {
-        candidates = voices.filter(v => maleKeywords.some(k => n(v).includes(k)));
-        if (!candidates.length) candidates = voices.filter(v => !femaleKeywords.some(k => n(v).includes(k)));
-      }
-      if (!candidates.length) candidates = voices;
-      // Pilih yang score tertinggi
-      return candidates.sort((a, b) => scoreVoice(b) - scoreVoice(a))[0] || null;
-    }
-
     function loadVoices() {
       const all = speechSynthesis.getVoices();
       if (!all.length) return;
-
-      // Pool suara terbaik (id, ms, atau en)
       const pool = all
         .filter(v => v.lang.startsWith('id') || v.lang.startsWith('ms') || v.lang.startsWith('en'))
         .sort((a, b) => scoreVoice(b) - scoreVoice(a));
-
-      const best = pool.length ? pool : all;
-      voiceIbu = pickGender(best, true);
-      voiceAyah = pickGender(best, false);
-
-      // Kalau hanya dapat satu suara, pakai keduanya
-      if (!voiceIbu) voiceIbu = voiceAyah || all[0];
-      if (!voiceAyah) voiceAyah = voiceIbu || all[0];
-
+      bestVoice = (pool.length ? pool : all)[0] || null;
       voicesReady = true;
-
-      // Debug info (bisa dibuang)
-      console.log('🎙️ Ibu Guru :', voiceIbu?.name, voiceIbu?.lang);
-      console.log('🎙️ Pak Guru :', voiceAyah?.name, voiceAyah?.lang);
     }
 
-    // Panggil saat voices berubah DAN langsung sekali
     if (speechSynthesis.onvoiceschanged !== undefined) {
       speechSynthesis.onvoiceschanged = loadVoices;
     }
     loadVoices();
-    setTimeout(loadVoices, 300);  // fallback untuk browser lambat
+    setTimeout(loadVoices, 300);
 
-    // ── Prosody: variasi kecil agar tidak monoton ──
+    // Prosody jitter agar tidak monoton
     function jitter(base, range) {
       return base + (Math.random() * range * 2 - range);
     }
 
-    // ── Core speak ──
-    function getCurrentVoice() {
-      return useIbu ? voiceIbu : voiceAyah;
-    }
+    // Pitch dan rate tetap — natural, tidak berganti-ganti
+    function basePitch() { return 1.10; }
+    function baseRate() { return 0.80; }
 
-    // Pitch dasar ibu lebih tinggi, ayah lebih rendah
-    function basePitch() { return useIbu ? 1.18 : 0.92; }
-    function baseRate() { return useIbu ? 0.80 : 0.78; }
+    function getCurrentVoice() { return bestVoice; }
 
     let _speakTimer = null;
     function speak(text, rateMod = 0, pitchMod = 0) {
@@ -5168,7 +5443,6 @@
         const v = getCurrentVoice();
         if (v) { u.voice = v; u.lang = v.lang; }
         else { u.lang = 'id-ID'; }
-        // Tambah sedikit jitter supaya tidak kaku
         u.rate = jitter(baseRate() + rateMod, 0.03);
         u.pitch = jitter(basePitch() + pitchMod, 0.04);
         u.volume = 1;
@@ -5176,7 +5450,6 @@
       }, 90);
     }
 
-    // ── Sequence speak: kalimat dipisah biar ada jeda napas alami ──
     let _seqAbort = false;
     function speakSequence(parts, delay = 380) {
       _seqAbort = false;
@@ -5186,7 +5459,6 @@
       function next() {
         if (_seqAbort || idx >= parts.length) return;
         const item = parts[idx++];
-        // Support format lama [text, rate, pitch] ATAU {t, r, p}
         const text = Array.isArray(item) ? item[0] : item.t;
         const rateMod = (Array.isArray(item) ? (item[1] || baseRate()) : (item.r || baseRate())) - baseRate();
         const pitchMod = (Array.isArray(item) ? (item[2] || basePitch()) : (item.p || basePitch())) - basePitch();
@@ -5198,8 +5470,6 @@
         u.rate = jitter(baseRate() + rateMod, 0.03);
         u.pitch = jitter(basePitch() + pitchMod, 0.04);
         u.volume = 1;
-
-        // Jeda alami setelah tanda seru/tanya lebih panjang
         const pauseExtra = /[!?]$/.test(text.trim()) ? 120 : 0;
         u.onend = () => setTimeout(next, delay + pauseExtra);
         speechSynthesis.speak(u);
@@ -5213,8 +5483,8 @@
       speechSynthesis.cancel();
     }
 
-    // ── Toggle guru setelah setiap soal selesai ──
-    function switchGuru() { useIbu = !useIbu; }
+    // switchGuru tidak lagi bergantian tapi tetap ada agar kode lain tidak error
+    function switchGuru() { /* single voice — no op */ }
 
     // ── Efek "ding" menyenangkan pakai AudioContext ──
     function playSound(type) {
@@ -5333,7 +5603,6 @@
         if (i2 < q2.length) hurufQueue.push(q2[i2++]);
       }
       hurufBenarCount = 0; hurufSalahCount = 0; hurufPtsCount = 0; hurufAnswered = 0;
-      useIbu = true;
       document.getElementById('hurufBenar').textContent = 0;
       document.getElementById('hurufSalah').textContent = 0;
       document.getElementById('hurufPts').textContent = 0;
@@ -5430,21 +5699,14 @@
         document.getElementById('hurufBenar').textContent = hurufBenarCount;
         document.getElementById('hurufPts').textContent = hurufPtsCount;
 
-        // Respons ibu/bapak guru — terasa hangat dan spontan
-        const praiseIbu = [
-          [{ t: 'Waaah betul sekali!', r: 0.72, p: 1.22 }, { t: 'Pintar banget kamu!', r: 0.76, p: 1.18 }, { t: `Iya, huruf ${correct} dari kata ${hurufCurrent.word.toLowerCase()}!`, r: 0.74, p: 1.15 }],
-          [{ t: 'Hore! Jawabannya benar!', r: 0.74, p: 1.20 }, { t: 'Ibu senang sekali!', r: 0.72, p: 1.18 }, { t: 'Kamu pasti bisa terus!', r: 0.76, p: 1.15 }],
-          [{ t: 'Hebaaaat!', r: 0.70, p: 1.25 }, { t: 'Kamu memang anak yang cerdas!', r: 0.74, p: 1.18 }, { t: 'Lanjut soal berikutnya ya!', r: 0.78, p: 1.15 }],
-          [{ t: 'Yesss! Betul!', r: 0.72, p: 1.22 }, { t: `Huruf ${correct}... kamu sudah hafal rupanya!`, r: 0.74, p: 1.15 }, { t: 'Semangat terus ya!', r: 0.76, p: 1.18 }],
+        const praises = [
+          [{ t: 'Waaah betul sekali!', r: 0.72, p: basePitch() + 0.10 }, { t: 'Pintar banget kamu!', r: 0.76, p: basePitch() + 0.06 }, { t: `Iya, huruf ${correct} dari kata ${hurufCurrent.word.toLowerCase()}!`, r: 0.74, p: basePitch() }],
+          [{ t: 'Hore! Jawabannya benar!', r: 0.74, p: basePitch() + 0.08 }, { t: 'Guru senang sekali!', r: 0.72, p: basePitch() + 0.06 }, { t: 'Kamu pasti bisa terus!', r: 0.76, p: basePitch() }],
+          [{ t: 'Hebaaaat!', r: 0.70, p: basePitch() + 0.12 }, { t: 'Kamu memang anak yang cerdas!', r: 0.74, p: basePitch() + 0.06 }, { t: 'Lanjut soal berikutnya ya!', r: 0.78, p: basePitch() }],
+          [{ t: 'Yesss! Betul!', r: 0.72, p: basePitch() + 0.10 }, { t: `Huruf ${correct}... kamu sudah hafal rupanya!`, r: 0.74, p: basePitch() }, { t: 'Semangat terus ya!', r: 0.76, p: basePitch() + 0.06 }],
+          [{ t: 'Bagus sekali!', r: 0.74, p: basePitch() + 0.06 }, { t: `Huruf ${correct} memang benar!`, r: 0.74, p: basePitch() }, { t: 'Terus belajar ya!', r: 0.76, p: basePitch() }],
         ];
-        const praiseAyah = [
-          [{ t: 'Naaaah betul!', r: 0.74, p: 0.95 }, { t: 'Bagus sekali!', r: 0.76, p: 0.92 }, { t: `Huruf ${correct} memang benar dari kata ${hurufCurrent.word.toLowerCase()}!`, r: 0.74, p: 0.90 }],
-          [{ t: 'Wah, kamu pintar!', r: 0.74, p: 0.93 }, { t: 'Pak guru bangga sama kamu!', r: 0.72, p: 0.90 }, { t: 'Terus belajar ya!', r: 0.76, p: 0.92 }],
-          [{ t: 'Benar! Mantap!', r: 0.74, p: 0.94 }, { t: 'Satu poin lagi buat kamu!', r: 0.72, p: 0.90 }, { t: 'Ayo soal selanjutnya!', r: 0.78, p: 0.92 }],
-        ];
-
-        const pool = useIbu ? praiseIbu : praiseAyah;
-        speakSequence(pool[Math.floor(Math.random() * pool.length)], 300);
+        speakSequence(praises[Math.floor(Math.random() * praises.length)], 300);
         setTimeout(() => { hurufAnswered++; nextHurufQuestion(); }, 1800);
 
       } else {
@@ -5454,18 +5716,13 @@
         hurufSalahCount++;
         document.getElementById('hurufSalah').textContent = hurufSalahCount;
 
-        const cryIbu = [
-          [{ t: 'Oops, belum tepat.', r: 0.72, p: 1.15 }, { t: `Yang benar adalah huruf ${correct}.`, r: 0.70, p: 1.12 }, { t: 'Tidak apa-apa, kita coba lagi ya!', r: 0.74, p: 1.18 }],
-          [{ t: 'Hmm, hampir!', r: 0.72, p: 1.18 }, { t: `Huruf ${correct} lho dari kata ${hurufCurrent.word.toLowerCase()}.`, r: 0.70, p: 1.12 }, { t: 'Ibu yakin kamu bisa!', r: 0.74, p: 1.20 }],
-          [{ t: 'Sayang sekali, bukan itu.', r: 0.70, p: 1.15 }, { t: `Jawaban yang benar adalah ${correct}.`, r: 0.72, p: 1.10 }, { t: 'Yuk ingat-ingat lagi, ya!', r: 0.74, p: 1.18 }],
+        const encouragements = [
+          [{ t: 'Oops, belum tepat.', r: 0.72, p: basePitch() }, { t: `Yang benar adalah huruf ${correct}.`, r: 0.70, p: basePitch() - 0.03 }, { t: 'Tidak apa-apa, kita coba lagi ya!', r: 0.74, p: basePitch() + 0.06 }],
+          [{ t: 'Hmm, hampir!', r: 0.72, p: basePitch() + 0.06 }, { t: `Huruf ${correct} lho dari kata ${hurufCurrent.word.toLowerCase()}.`, r: 0.70, p: basePitch() }, { t: 'Guru yakin kamu bisa!', r: 0.74, p: basePitch() + 0.08 }],
+          [{ t: 'Sayang sekali, bukan itu.', r: 0.70, p: basePitch() }, { t: `Jawaban yang benar adalah ${correct}.`, r: 0.72, p: basePitch() - 0.02 }, { t: 'Yuk ingat-ingat lagi, ya!', r: 0.74, p: basePitch() + 0.06 }],
+          [{ t: 'Belum ya.', r: 0.72, p: basePitch() }, { t: `Ingat ya, ${hurufCurrent.word.toLowerCase()} itu huruf ${correct}.`, r: 0.70, p: basePitch() }, { t: 'Kamu pasti bisa!', r: 0.74, p: basePitch() + 0.06 }],
         ];
-        const cryAyah = [
-          [{ t: 'Wah, kurang tepat nih.', r: 0.72, p: 0.90 }, { t: `Huruf yang benar adalah ${correct}.`, r: 0.70, p: 0.88 }, { t: 'Semangat, coba lagi!', r: 0.76, p: 0.92 }],
-          [{ t: 'Belum ya.', r: 0.72, p: 0.90 }, { t: `Ingat ya, ${hurufCurrent.word.toLowerCase()} itu huruf ${correct}.`, r: 0.70, p: 0.88 }, { t: 'Pak guru percaya kamu bisa!', r: 0.74, p: 0.92 }],
-        ];
-
-        const pool = useIbu ? cryIbu : cryAyah;
-        speakSequence(pool[Math.floor(Math.random() * pool.length)], 320);
+        speakSequence(encouragements[Math.floor(Math.random() * encouragements.length)], 320);
         setTimeout(() => { hurufAnswered++; nextHurufQuestion(); }, 2200);
       }
     }
@@ -5479,9 +5736,8 @@
       swalHasil(icon, msg, sub, hurufBenarCount, hurufSalahCount, hurufPtsCount);
       document.getElementById('hurufProgressFill').style.width = '100%';
       document.getElementById('hurufProgressText').textContent = 'Selesai! 🎉';
-      useIbu = true;
       speakSequence([
-        { t: 'Selamat!', r: 0.70, p: 1.22 },
+        { t: 'Selamat!', r: 0.70, p: basePitch() + 0.10 },
         { t: 'Kamu sudah menyelesaikan semua soal huruf!', r: 0.74, p: 1.18 },
         { t: `Nilaimu ${pct} persen.`, r: 0.72, p: 1.15 },
         { t: pct >= 85 ? 'Luar biasa, kamu sangat pintar!' : pct >= 60 ? 'Bagus sekali, terus berlatih ya!' : 'Jangan menyerah, ayo coba lagi!', r: 0.76, p: 1.20 },
@@ -5816,7 +6072,7 @@
       if (!activityGate.check('gambar')) return;
       addScore(5);
       updateProgress('gambar', 1, 1);
-      activityGate.reset('gambar'); // must draw again to earn again
+      activityGate.reset('gambar');
       playSound('correct');
       speakSequence([
         { t: 'Waaah, gambarnya bagus sekali!', r: 0.72, p: basePitch() + 0.08 },
@@ -5847,7 +6103,7 @@
     function clearCanvas() {
       const c = document.getElementById('drawCanvas');
       drawCtx.clearRect(0, 0, c.width, c.height);
-      activityGate.reset('gambar'); // must redraw to earn points
+      activityGate.reset('gambar');
     }
 
     // ═══ BACA ═══
@@ -5897,7 +6153,7 @@
       renderBaca();
       addScore(2);
       updateProgress('baca', Math.min(bacaIdx + 1, bacaData.length), bacaData.length);
-      activityGate.reset('baca'); // require listen again on new word
+      activityGate.reset('baca');
     }
     function prevBaca() { bacaIdx = (bacaIdx + bacaData.length - 1) % bacaData.length; renderBaca(); activityGate.reset('baca'); }
     function speakBaca() {
@@ -5908,7 +6164,7 @@
         { t: `${b.word.toLowerCase()}!`, r: 0.72, p: basePitch() + 0.06 },
         { t: 'Bagus! Kamu bisa membacanya!', r: 0.74, p: basePitch() + 0.03 },
       ], 300);
-      activityGate.markDone('baca'); // unlock Berikutnya
+      activityGate.markDone('baca');
     }
 
     // ═══ TULIS CANVAS ═══
@@ -5931,7 +6187,6 @@
       c.addEventListener('mousemove', e => { if (writing) doWrite(e); });
       c.addEventListener('mouseup', () => {
         writing = false;
-        // Mark as interacted only if they actually drew something
         const imageData = writeCtx.getImageData(0, 0, c.width, c.height);
         const hasDrawing = imageData.data.some((v, i) => i % 4 === 3 && v > 0);
         if (hasDrawing) activityGate.markDone('tulis');
@@ -5963,7 +6218,7 @@
     function clearWrite() {
       const c = document.getElementById('writeCanvas');
       writeCtx.clearRect(0, 0, c.width, c.height);
-      activityGate.reset('tulis'); // cleared = must redraw to proceed
+      activityGate.reset('tulis');
     }
     function renderTulis() {
       const ch = tulisChars[tulisIdx];
@@ -5974,18 +6229,12 @@
     function nextTulis() {
       if (!activityGate.check('tulis')) return;
       tulisIdx = (tulisIdx + 1) % tulisChars.length;
-      renderTulis(); // also resets gate via clearWrite
+      renderTulis();
       addScore(2);
       updateProgress('tulis', Math.min(tulisIdx + 1, 26), 26);
     }
     function prevTulis() { tulisIdx = (tulisIdx + tulisChars.length - 1) % tulisChars.length; renderTulis(); }
 
-
-    // ══════════════════════════════════════════════════
-    // 🎯 DUOLINGO-STYLE ADVENTURE GAME ENGINE
-    // ══════════════════════════════════════════════════
-
-    // ── Data: 5 Tema × 5 Babak per tema = 25 stage ──
     const DUO_THEMES = [
       { id: 'huruf', label: 'Huruf A-Z', emoji: '🔤', color: '#3b82f6', shadow: '#1d4ed8' },
       { id: 'angka', label: 'Angka 1-10', emoji: '🔢', color: '#22c55e', shadow: '#15803d' },
@@ -5994,19 +6243,17 @@
       { id: 'hitung', label: 'Berhitung', emoji: '🧮', color: '#a78bfa', shadow: '#6d28d9' },
     ];
 
-    // 5 babak per tema, tiap babak 6 soal
     const DUO_STAGES_PER_THEME = 5;
     const DUO_Q_PER_ROUND = 6;
 
     // ── State ──
     let duoXP = 0, duoLevel = 1, duoHearts = 5;
-    let duoStagesDone = {}; // key: "themeIdx-stageIdx" → true
+    let duoHeartsEmptiedAt = null;
+    let duoStagesDone = {};
     let duoCurrentTheme = 0, duoCurrentStage = 0;
     let duoRoundQs = [], duoRoundIdx = 0, duoRoundWrong = 0;
     let duoAnswered = false;
 
-    // ── Question Banks ──
-    // Huruf: campuran soal huruf DEPAN dan huruf BELAKANG
     const DUO_HURUF_Q = [
       // ── HURUF DEPAN ──
       { t: 'Huruf Pertama 🔤', q: 'Apa huruf PERTAMA dari kata ini?', e: '🍎', sub: 'APEL', choices: [{ text: 'A' }, { text: 'B' }, { text: 'C' }, { text: 'D' }], ans: 0 },
@@ -6109,14 +6356,10 @@
 
     const DUO_BANKS = [DUO_HURUF_Q, DUO_ANGKA_Q, DUO_WARNA_Q, DUO_BENTUK_Q, DUO_HITUNG_Q];
 
-    // ── Build map ──
     function buildDuoMap() {
       const path = document.getElementById('duoPath');
       path.innerHTML = '';
 
-      // Urutan linear: babak 1 semua tema → babak 2 semua tema → dst
-      // T0S0(idx0), T1S0(idx1), T2S0(idx2), T3S0(idx3), T4S0(idx4),
-      // T0S1(idx5), T1S1(idx6), ...
       const nodes = [];
       for (let s = 0; s < DUO_STAGES_PER_THEME; s++) {
         for (let t = 0; t < DUO_THEMES.length; t++) {
@@ -6124,16 +6367,13 @@
         }
       }
 
-      // Hitung berapa node yang sudah selesai secara berurutan dari awal
-      // Node idx TERBUKA jika: idx === 0, ATAU nodes[idx-1] sudah done
-      // Ini memastikan satu per satu terbuka berurutan
       nodes.forEach(function (node, idx) {
         const theme = DUO_THEMES[node.t];
         const isDone = duoStagesDone[node.key] === true;
 
         var prevDone = false;
         if (idx === 0) {
-          prevDone = true; // node pertama selalu terbuka
+          prevDone = true;
         } else {
           prevDone = duoStagesDone[nodes[idx - 1].key] === true;
         }
@@ -6142,13 +6382,11 @@
         const isActive = isUnlocked && !isDone;
         const isLocked = !isUnlocked;
 
-        // Buat node container
         var nodeEl = document.createElement('div');
         nodeEl.className = 'duo-node';
         var offset = (idx % 3 === 1) ? -50 : (idx % 3 === 2) ? 50 : 0;
         nodeEl.style.marginLeft = offset + 'px';
 
-        // Buat tombol
         var btn = document.createElement('button');
         var cls = 'duo-node-btn';
         if (isDone) cls += ' done';
@@ -6161,7 +6399,6 @@
           btn.style.boxShadow = '0 6px 0 ' + theme.shadow + ', 0 8px 20px rgba(0,0,0,.14)';
         }
 
-        // Isi icon tombol (pakai innerHTML agar crown bisa ditumpuk)
         if (isDone) {
           btn.innerHTML = '✅<span class="crown">👑</span>';
         } else if (isLocked) {
@@ -6170,14 +6407,19 @@
           btn.innerHTML = theme.emoji;
         }
 
-        // Pasang onclick hanya jika tidak locked
         if (!isLocked) {
           (function (ti, si) {
             btn.onclick = function () { startDuoRound(ti, si); };
           })(node.t, node.s);
         }
 
-        // Label di bawah tombol
+        if (isActive && duoHearts <= 0) {
+          btn.innerHTML = '💔';
+          btn.style.background = 'linear-gradient(135deg,#fca5a5,#ef4444)';
+          btn.style.boxShadow = '0 6px 0 #b91c1c, 0 8px 20px rgba(0,0,0,.14)';
+          btn.style.opacity = '0.75';
+        }
+
         var label = document.createElement('div');
         label.className = 'duo-node-label';
         label.textContent = theme.label + ' ' + (node.s + 1);
@@ -6198,18 +6440,62 @@
       document.getElementById('duoXPFill').style.width = (xpInLevel) + '%';
       document.getElementById('duoLevelNum').textContent = duoLevel;
       const hearts = '❤️'.repeat(duoHearts) + '🖤'.repeat(Math.max(0, 5 - duoHearts));
-      document.getElementById('duoHeartsBar').textContent = hearts;
+      var heartsBar = document.getElementById('duoHeartsBar');
+      heartsBar.textContent = hearts;
+      if (duoHearts <= 0) heartsBar.classList.add('empty');
+      else heartsBar.classList.remove('empty');
+
+      // Banner peringatan nyawa habis
+      var banner = document.getElementById('duoHeartEmptyBanner');
+      if (!banner) {
+        banner = document.createElement('div');
+        banner.id = 'duoHeartEmptyBanner';
+        banner.style.cssText = 'display:none;background:linear-gradient(135deg,#fef2f2,#fee2e2);border:2px solid #fca5a5;border-radius:16px;padding:12px 16px;margin:8px 0 12px;text-align:center;cursor:pointer;';
+        banner.onclick = showHeartEmptyModal;
+        var mapView = document.getElementById('duo-map-view');
+        var statusEl = mapView ? mapView.querySelector('.duo-status') : null;
+        if (statusEl) statusEl.after(banner);
+      }
+      if (duoHearts <= 0) {
+        var ms = getHeartRefillTimeLeft();
+        banner.style.display = 'block';
+        banner.innerHTML = '<div style="font-family:\'Fredoka One\',cursive;font-size:1.1rem;color:#b91c1c">💔 Nyawa Habis!</div>'
+          + '<div style="font-size:.82rem;font-weight:700;color:#64748b;margin-top:4px">Hati akan terisi penuh dalam <span style="color:#ef4444;font-family:\'Fredoka One\',cursive" id="bannerCountdown">'
+          + formatTimeLeft(ms) + '</span></div>'
+          + '<div style="font-size:.72rem;color:#94a3b8;margin-top:2px">Ketuk untuk melihat detail</div>';
+        if (!banner._tick) {
+          banner._tick = setInterval(function () {
+            checkHeartRefill();
+            var el = document.getElementById('bannerCountdown');
+            if (!el) { clearInterval(banner._tick); banner._tick = null; return; }
+            if (duoHearts > 0) {
+              clearInterval(banner._tick); banner._tick = null;
+              updateDuoStatus(); buildDuoMap(); return;
+            }
+            el.textContent = formatTimeLeft(getHeartRefillTimeLeft());
+          }, 1000);
+        }
+      } else {
+        banner.style.display = 'none';
+        if (banner._tick) { clearInterval(banner._tick); banner._tick = null; }
+      }
     }
 
     // ── Start a round ──
     function startDuoRound(themeIdx, stageIdx) {
+      checkHeartRefill();
+
+      if (duoHearts <= 0) {
+        showHeartEmptyModal();
+        return;
+      }
+
       duoCurrentTheme = themeIdx;
       duoCurrentStage = stageIdx;
       duoRoundWrong = 0;
       duoRoundIdx = 0;
       duoAnswered = false;
 
-      // Ambil soal dari bank — rotasi berdasarkan stageIdx agar tiap babak beda
       var bank = DUO_BANKS[themeIdx];
       duoRoundQs = [];
       var offset = stageIdx * DUO_Q_PER_ROUND;
@@ -6236,9 +6522,118 @@
       document.getElementById('duoRoundHearts').textContent = hearts;
     }
 
-    // ── Render a question ──
+    // ── Heart refill system ──
+    const DUO_HEART_REFILL_MS = 24 * 60 * 60 * 1000;
+
+    function checkHeartRefill() {
+      if (duoHearts > 0) { duoHeartsEmptiedAt = null; return; }
+      if (!duoHeartsEmptiedAt) return;
+      var elapsed = Date.now() - duoHeartsEmptiedAt;
+      if (elapsed >= DUO_HEART_REFILL_MS) {
+        duoHearts = 5;
+        duoHeartsEmptiedAt = null;
+        saveGameState();
+      }
+    }
+
+    function getHeartRefillTimeLeft() {
+      if (duoHearts > 0 || !duoHeartsEmptiedAt) return 0;
+      var remaining = DUO_HEART_REFILL_MS - (Date.now() - duoHeartsEmptiedAt);
+      return Math.max(0, remaining);
+    }
+
+    function formatTimeLeft(ms) {
+      if (ms <= 0) return '00:00:00';
+      var totalSec = Math.floor(ms / 1000);
+      var h = Math.floor(totalSec / 3600);
+      var m = Math.floor((totalSec % 3600) / 60);
+      var s = totalSec % 60;
+      return (h < 10 ? '0' : '') + h + ':' + (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+    }
+
+    var _heartCountdownTimer = null;
+
+    function showHeartEmptyModal() {
+      if (_heartCountdownTimer) clearInterval(_heartCountdownTimer);
+
+      function getHtml() {
+        checkHeartRefill();
+        if (duoHearts > 0) return null;
+        var ms = getHeartRefillTimeLeft();
+        var timeStr = formatTimeLeft(ms);
+        return `
+      <div style="font-size:3rem;margin-bottom:8px">💔</div>
+      <div style="font-family:'Fredoka One',cursive;font-size:1.7rem;color:#b91c1c;margin-bottom:6px">Nyawa Habis!</div>
+      <div style="color:#64748b;font-size:.9rem;font-weight:700;margin-bottom:14px">
+        Semua ❤️ kamu sudah habis.<br>Istirahat dulu ya, hati akan terisi penuh dalam:
+      </div>
+      <div id="heartCountdownDisplay" style="
+        font-family:'Fredoka One',cursive;font-size:2.4rem;
+        color:#ef4444;background:#fef2f2;border-radius:16px;
+        padding:10px 24px;display:inline-block;
+        border:3px solid #fca5a5;margin-bottom:10px;
+        letter-spacing:2px;
+      ">${timeStr}</div>
+      <div style="color:#94a3b8;font-size:.78rem;font-weight:700;margin-top:6px">
+        🌙 Nyawa akan pulih otomatis setelah 24 jam
+      </div>
+    `;
+      }
+
+      var initialHtml = getHtml();
+      if (!initialHtml) { updateDuoStatus(); buildDuoMap(); return; }
+
+      ['header', '.score-bar'].forEach(function (sel) {
+        var el = document.querySelector(sel);
+        if (el) { el.setAttribute('data-swal-z', el.style.zIndex || ''); el.style.zIndex = '0'; }
+      });
+
+      Swal.fire({
+        html: initialHtml,
+        showConfirmButton: false,
+        allowOutsideClick: true,
+        allowEscapeKey: true,
+        background: '#fff5f5',
+        customClass: { popup: 'swal-kids' },
+        showClass: { popup: 'animate__animated animate__bounceIn' },
+        hideClass: { popup: 'animate__animated animate__fadeOutUp' },
+        didOpen: function () {
+          var container = document.querySelector('.swal2-container');
+          if (container) {
+            container.style.cssText = 'position:fixed!important;top:0!important;left:0!important;right:0!important;bottom:0!important;width:100vw!important;height:100vh!important;inset:0!important;margin:0!important;z-index:999999!important;display:flex!important;align-items:center!important;justify-content:center!important;padding:16px!important;box-sizing:border-box!important;background:rgba(185,28,28,0.45)!important';
+          }
+          _heartCountdownTimer = setInterval(function () {
+            checkHeartRefill();
+            if (duoHearts > 0) {
+              clearInterval(_heartCountdownTimer);
+              Swal.close();
+              updateDuoStatus();
+              buildDuoMap();
+              swalKids.fire({
+                customClass: { popup: 'swal-kids swal-kids-success' },
+                html: '<div style="font-size:2.5rem">❤️❤️❤️❤️❤️</div><div style="font-family:\'Fredoka One\',cursive;font-size:1.6rem;color:#15803d;margin-top:8px">Nyawa Terisi Penuh!</div><div style="color:#64748b;font-size:.88rem;font-weight:700;margin-top:6px">Ayo lanjutkan petualangan belajar! 🚀</div>',
+                confirmButtonText: 'Ayo Lanjut! 🚀',
+                timer: 5000, timerProgressBar: true,
+              });
+              return;
+            }
+            var el = document.getElementById('heartCountdownDisplay');
+            if (el) el.textContent = formatTimeLeft(getHeartRefillTimeLeft());
+          }, 1000);
+        },
+        didClose: function () {
+          if (_heartCountdownTimer) clearInterval(_heartCountdownTimer);
+          ['header', '.score-bar'].forEach(function (sel) {
+            var el = document.querySelector(sel);
+            if (el) { el.style.zIndex = el.getAttribute('data-swal-z') || ''; el.removeAttribute('data-swal-z'); }
+          });
+        },
+      });
+
+      speak('Nyawa kamu sudah habis. Istirahat dulu ya, dan kembalilah besok!', 0.72, basePitch());
+    }
+
     function renderDuoQ() {
-      // Jika semua soal selesai → akhiri babak
       if (duoRoundIdx >= duoRoundQs.length) {
         endDuoRound();
         return;
@@ -6246,6 +6641,15 @@
 
       duoAnswered = false;
       hideDuoFeedback();
+
+      var fbBtn = document.getElementById('duoFBBtn');
+      if (fbBtn) {
+        fbBtn.textContent = 'Lanjut';
+        fbBtn.style.background = '';
+        fbBtn.style.color = '';
+        fbBtn.style.cursor = '';
+        fbBtn.style.opacity = '';
+      }
 
       var q = duoRoundQs[duoRoundIdx];
       var pct = (duoRoundIdx / duoRoundQs.length) * 100;
@@ -6283,7 +6687,6 @@
 
       box.appendChild(grid);
 
-      // Ucapkan soal
       setTimeout(function () {
         var isBack = q.t && q.t.indexOf('Terakhir') !== -1;
         var isFront = q.t && q.t.indexOf('Pertama') !== -1;
@@ -6296,7 +6699,6 @@
       }, 350);
     }
 
-    // ── Check answer ──
     function checkDuoAnswer(chosenIdx, btn, grid) {
       if (duoAnswered) return;
       duoAnswered = true;
@@ -6310,7 +6712,6 @@
       if (isCorrect) {
         btn.classList.add('correct');
         playSound('correct');
-        // Update XP & skor langsung tanpa memanggil addScore (hindari popup bintang)
         duoXP += 5;
         score += 5; streak++;
         if (duoXP >= duoLevel * 100) duoLevel++;
@@ -6325,13 +6726,23 @@
         allBtns[q.ans].classList.add('correct');
         duoRoundWrong++;
         if (duoHearts > 0) duoHearts--;
+        if (duoHearts === 0 && !duoHeartsEmptiedAt) {
+          duoHeartsEmptiedAt = Date.now();
+          saveGameState();
+        }
         updateDuoStatus();
         updateRoundHearts();
         showDuoFeedback(false, q);
+        if (duoHearts === 0) {
+          setTimeout(function () {
+            hideDuoFeedback();
+            exitDuoRound();
+            setTimeout(showHeartEmptyModal, 400);
+          }, 2200);
+        }
       }
     }
 
-    // ── Feedback bar ──
     function showDuoFeedback(correct, q) {
       var fb = document.getElementById('duoFeedback');
       fb.className = 'duo-feedback show ' + (correct ? 'ok' : 'err');
@@ -6350,11 +6761,34 @@
       } else {
         document.getElementById('duoFBMsg').childNodes[0].textContent = 'Belum tepat...';
         document.getElementById('duoFBSub').textContent = 'Jawaban benar: ' + correctAnswer;
-        speakSequence([
-          { t: 'Belum tepat.', r: 0.70, p: basePitch() },
-          { t: 'Jawabannya adalah ' + correctAnswer + '.', r: 0.72, p: basePitch() - 0.02 },
-          { t: 'Tidak apa-apa, terus semangat!', r: 0.74, p: basePitch() + 0.03 },
-        ], 260);
+        if (duoHearts <= 0) {
+          var btn = document.getElementById('duoFBBtn');
+          if (btn) {
+            btn.textContent = '💔 Nyawa Habis...';
+            btn.style.background = '#fca5a5';
+            btn.style.color = '#b91c1c';
+            btn.style.cursor = 'default';
+            btn.style.opacity = '0.85';
+          }
+          speakSequence([
+            { t: 'Oh tidak! Nyawa kamu habis.', r: 0.70, p: basePitch() },
+            { t: 'Istirahat dulu ya, dan kembali besok!', r: 0.72, p: basePitch() - 0.02 },
+          ], 260);
+        } else {
+          var btn = document.getElementById('duoFBBtn');
+          if (btn) {
+            btn.textContent = 'Lanjut';
+            btn.style.background = '';
+            btn.style.color = '';
+            btn.style.cursor = '';
+            btn.style.opacity = '';
+          }
+          speakSequence([
+            { t: 'Belum tepat.', r: 0.70, p: basePitch() },
+            { t: 'Jawabannya adalah ' + correctAnswer + '.', r: 0.72, p: basePitch() - 0.02 },
+            { t: 'Tidak apa-apa, terus semangat!', r: 0.74, p: basePitch() + 0.03 },
+          ], 260);
+        }
       }
     }
 
@@ -6363,6 +6797,7 @@
     }
 
     function duoNextQ() {
+      if (duoHearts <= 0) return;
       duoAnswered = false;
       hideDuoFeedback();
       duoRoundIdx++;
@@ -6380,7 +6815,6 @@
       addScore(xpGain);
       updateDuoStatus();
 
-      // Update duolingo progress
       var doneCount = Object.keys(duoStagesDone).filter(k => duoStagesDone[k]).length;
       updateProgress('duolingo', doneCount, 25);
 
@@ -6459,19 +6893,21 @@
         document.getElementById('game-duolingo').classList.add('active');
         document.getElementById('duo-map-view').style.display = 'block';
         document.getElementById('duo-round-view').style.display = 'none';
+        checkHeartRefill();
         buildDuoMap();
         setTimeout(() => speakSequence([
           { t: 'Selamat datang di Game Petualangan!', r: 0.72, p: basePitch() + 0.05 },
-          { t: 'Pilih babak yang ingin kamu mainkan!', r: 0.74, p: basePitch() },
+          {
+            t: duoHearts > 0
+              ? 'Pilih babak yang ingin kamu mainkan!'
+              : 'Nyawa kamu habis. Istirahat dulu ya!',
+            r: 0.74, p: basePitch()
+          },
         ], 300), 400);
         return;
       }
       _origShowGame(id);
     };
-
-    // ══════════════════════════════════════════════
-    // 🔐 AUTH SYSTEM — Email & Password + localStorage
-    // ══════════════════════════════════════════════
 
     var currentUser = null;
 
@@ -6480,7 +6916,6 @@
       return 'belajaryuk_' + (currentUser ? currentUser.id : 'guest') + '_' + suffix;
     }
 
-    // Simple hash (bukan kriptografi — hanya untuk localStorage lokal)
     function simpleHash(str) {
       var h = 0;
       for (var i = 0; i < str.length; i++) {
@@ -6496,7 +6931,6 @@
       try { localStorage.setItem('by_users', JSON.stringify(users)); } catch (e) { }
     }
 
-    // ── Tab switch ────────────────────────────────
     function switchTab(tab) {
       document.getElementById('panelMasuk').classList.toggle('active', tab === 'masuk');
       document.getElementById('panelDaftar').classList.toggle('active', tab === 'daftar');
@@ -6599,7 +7033,6 @@
       }, 700);
     }
 
-    // Support Enter key
     document.addEventListener('keydown', function (e) {
       if (e.key !== 'Enter') return;
       var panelMasuk = document.getElementById('panelMasuk');
@@ -6624,6 +7057,7 @@
         localStorage.setItem(getUserKey('gs'), JSON.stringify({
           score: score, streak: streak, stars: stars,
           duoXP: duoXP, duoLevel: duoLevel, duoHearts: duoHearts,
+          duoHeartsEmptiedAt: duoHeartsEmptiedAt,
           duoStagesDone: duoStagesDone, savedAt: Date.now()
         }));
       } catch (e) { }
@@ -6637,7 +7071,9 @@
         var s = JSON.parse(raw);
         score = parseInt(s.score) || 0; streak = parseInt(s.streak) || 0; stars = parseInt(s.stars) || 0;
         duoXP = parseInt(s.duoXP) || 0; duoLevel = parseInt(s.duoLevel) || 1; duoHearts = parseInt(s.duoHearts) || 5;
+        duoHeartsEmptiedAt = s.duoHeartsEmptiedAt || null;
         duoStagesDone = s.duoStagesDone || {};
+        checkHeartRefill();
         document.getElementById('scoreVal').textContent = score;
         document.getElementById('streakVal').textContent = streak;
         document.getElementById('starsVal').textContent = stars;
@@ -6646,7 +7082,6 @@
 
     setInterval(saveGameState, 15000);
 
-    // ── UI UPDATES ────────────────────────────────
     function updateHeaderUI() {
       if (!currentUser) return;
       var chip = document.getElementById('userChip');
@@ -6678,12 +7113,196 @@
       document.getElementById('userMenuOverlay').classList.remove('show');
     }
 
+    // ── EDIT MODAL HELPERS ────────────────────────
+    function closeEditModals() {
+      ['editNameOverlay', 'editPassOverlay', 'resetGameOverlay'].forEach(function (id) {
+        document.getElementById(id).classList.remove('show');
+      });
+      ['editNameInput', 'editPassOld', 'editPassNew', 'editPassNew2', 'resetConfirmInput'].forEach(function (id) {
+        var el = document.getElementById(id); if (el) el.value = '';
+      });
+      ['editNameMsg', 'editPassMsg', 'resetGameMsg'].forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el) { el.className = 'edit-modal-msg'; el.textContent = ''; }
+      });
+    }
+
+    function showEditMsg(msgId, text, isErr) {
+      var el = document.getElementById(msgId);
+      if (!el) return;
+      el.textContent = text;
+      el.className = 'edit-modal-msg ' + (isErr ? 'err' : 'ok');
+    }
+
+    // ── Ganti Username ────────────────────────────
+    function openEditName() {
+      document.getElementById('userMenu').classList.remove('show');
+      document.getElementById('userMenuOverlay').classList.remove('show');
+      setTimeout(function () {
+        var el = document.getElementById('editNameInput');
+        if (el && currentUser) el.value = currentUser.name;
+        document.getElementById('editNameMsg').className = 'edit-modal-msg';
+        document.getElementById('editNameMsg').textContent = '';
+        document.getElementById('editNameOverlay').classList.add('show');
+        setTimeout(function () { if (el) el.focus(); }, 150);
+      }, 200);
+    }
+
+    function saveEditName() {
+      var newName = document.getElementById('editNameInput').value.trim();
+      if (!newName || newName.length < 2) {
+        showEditMsg('editNameMsg', '⚠️ Nama minimal 2 karakter!', true); return;
+      }
+      if (newName.length > 40) {
+        showEditMsg('editNameMsg', '⚠️ Nama maksimal 40 karakter!', true); return;
+      }
+
+      currentUser.name = newName;
+      try { localStorage.setItem('by_current', JSON.stringify(currentUser)); } catch (e) { }
+
+      if (currentUser.type === 'email' && currentUser.email) {
+        var users = getAllUsers();
+        if (users[currentUser.email]) {
+          users[currentUser.email].name = newName;
+          saveAllUsers(users);
+        }
+      }
+
+      updateHeaderUI();
+      updateUserMenuStats();
+      showEditMsg('editNameMsg', '✅ Username berhasil diubah!', false);
+      speak('Nama berhasil diubah menjadi ' + newName.split(' ')[0], 0.72, basePitch());
+      setTimeout(closeEditModals, 1400);
+    }
+
+    // ── Ganti Password ────────────────────────────
+    function openEditPass() {
+      var isGuest = currentUser && currentUser.type === 'guest';
+      document.getElementById('userMenu').classList.remove('show');
+      document.getElementById('userMenuOverlay').classList.remove('show');
+      if (isGuest) {
+        setTimeout(function () {
+          swalKids.fire({
+            html: '<div style="font-size:2rem;margin-bottom:8px">🔒</div>'
+              + '<div style="font-family:\'Fredoka One\',cursive;font-size:1.4rem;color:var(--blue-dark)">Mode Tamu</div>'
+              + '<div style="color:#64748b;font-size:.88rem;font-weight:700;margin-top:8px">Daftar akun dulu untuk bisa mengatur password!</div>',
+            confirmButtonText: 'OK',
+            customClass: { popup: 'swal-kids' },
+          });
+        }, 200);
+        return;
+      }
+      setTimeout(function () {
+        ['editPassOld', 'editPassNew', 'editPassNew2'].forEach(function (id) {
+          var el = document.getElementById(id); if (el) el.value = '';
+        });
+        document.getElementById('editPassMsg').className = 'edit-modal-msg';
+        document.getElementById('editPassMsg').textContent = '';
+        document.getElementById('editPassOverlay').classList.add('show');
+        setTimeout(function () {
+          var el = document.getElementById('editPassOld'); if (el) el.focus();
+        }, 150);
+      }, 200);
+    }
+
+    function saveEditPass() {
+      var oldPass = document.getElementById('editPassOld').value;
+      var newPass = document.getElementById('editPassNew').value;
+      var newPass2 = document.getElementById('editPassNew2').value;
+
+      if (!oldPass) { showEditMsg('editPassMsg', '⚠️ Masukkan password lama!', true); return; }
+      if (newPass.length < 6) { showEditMsg('editPassMsg', '⚠️ Password baru minimal 6 karakter!', true); return; }
+      if (newPass !== newPass2) { showEditMsg('editPassMsg', '⚠️ Konfirmasi password tidak cocok!', true); return; }
+
+      var users = getAllUsers();
+      var userRec = currentUser.email ? users[currentUser.email] : null;
+      if (!userRec || userRec.passHash !== simpleHash(oldPass)) {
+        showEditMsg('editPassMsg', '❌ Password lama salah!', true); return;
+      }
+
+      userRec.passHash = simpleHash(newPass);
+      users[currentUser.email] = userRec;
+      saveAllUsers(users);
+
+      showEditMsg('editPassMsg', '✅ Password berhasil diubah!', false);
+      speak('Password berhasil diubah', 0.72, basePitch());
+      setTimeout(closeEditModals, 1400);
+    }
+
+    // ── Reset Progress Game ───────────────────────
+    function openResetGame() {
+      document.getElementById('userMenu').classList.remove('show');
+      document.getElementById('userMenuOverlay').classList.remove('show');
+      setTimeout(function () {
+        document.getElementById('resetConfirmInput').value = '';
+        document.getElementById('resetGameMsg').className = 'edit-modal-msg';
+        document.getElementById('resetGameMsg').textContent = '';
+        document.getElementById('resetGameOverlay').classList.add('show');
+        setTimeout(function () {
+          var inp = document.getElementById('resetConfirmInput');
+          if (inp) inp.focus();
+        }, 150);
+      }, 200);
+    }
+
+    function saveResetGame() {
+      var inputVal = document.getElementById('resetConfirmInput').value.trim().toUpperCase();
+      if (inputVal !== 'RESET') {
+        showEditMsg('resetGameMsg', '⚠️ Ketik RESET untuk konfirmasi!', true);
+        return;
+      }
+
+      score = 0; streak = 0; stars = 0;
+      duoXP = 0; duoLevel = 1; duoHearts = 5;
+      duoHeartsEmptiedAt = null; duoStagesDone = {};
+
+      if (typeof hurufBenarCount !== 'undefined') { hurufBenarCount = 0; hurufSalahCount = 0; hurufPtsCount = 0; }
+      if (typeof susunBenarCount !== 'undefined') { susunBenarCount = 0; susunSalahCount = 0; susunPtsCount = 0; }
+      if (typeof tebakBenarCount !== 'undefined') { tebakBenarCount = 0; tebakSalahCount = 0; tebakPtsCount = 0; }
+
+      Object.keys(PROGRESS_TOTALS).forEach(function (k) {
+        gameProgress[k] = { done: 0, total: PROGRESS_TOTALS[k] };
+      });
+
+      document.getElementById('scoreVal').textContent = 0;
+      document.getElementById('streakVal').textContent = 0;
+      document.getElementById('starsVal').textContent = 0;
+
+      try {
+        var prefix = 'belajaryuk_' + (currentUser ? currentUser.id : 'guest') + '_';
+        var keysToDelete = [];
+        for (var i = 0; i < localStorage.length; i++) {
+          var k = localStorage.key(i);
+          if (k && k.indexOf(prefix) === 0) keysToDelete.push(k);
+        }
+        keysToDelete.forEach(function (k) { localStorage.removeItem(k); });
+        localStorage.removeItem('belajarYukProgress');
+      } catch (e) { }
+
+      setTimeout(function () {
+        renderAllProgressCards();
+        if (typeof updateDuoStatus === 'function') updateDuoStatus();
+      }, 200);
+
+      showEditMsg('resetGameMsg', '✅ Progress game berhasil direset!', false);
+      speak('Progress game sudah direset. Ayo mulai lagi dari awal!', 0.72, basePitch());
+      setTimeout(function () {
+        closeEditModals();
+        updateUserMenuStats();
+      }, 1600);
+    }
+
     // ── FINISH LOGIN ──────────────────────────────
     function finishLogin(user) {
       currentUser = user;
       try { localStorage.setItem('by_current', JSON.stringify(user)); } catch (e) { }
       loadGameState();
+      gameProgress = loadProgress();
+      Object.keys(PROGRESS_TOTALS).forEach(function (k) {
+        if (!gameProgress[k]) gameProgress[k] = { done: 0, total: PROGRESS_TOTALS[k] };
+      });
       updateHeaderUI();
+      setTimeout(renderAllProgressCards, 300);
       var ls = document.getElementById('login-screen');
       ls.classList.add('hide');
       setTimeout(function () { ls.style.display = 'none'; }, 500);
@@ -6702,7 +7321,7 @@
       saveGameState();
       closeUserMenu();
       currentUser = null;
-      score = 0; streak = 0; stars = 0; duoXP = 0; duoLevel = 1; duoHearts = 5; duoStagesDone = {};
+      score = 0; streak = 0; stars = 0; duoXP = 0; duoLevel = 1; duoHearts = 5; duoHeartsEmptiedAt = null; duoStagesDone = {};
       document.getElementById('scoreVal').textContent = 0;
       document.getElementById('streakVal').textContent = 0;
       document.getElementById('starsVal').textContent = 0;
@@ -6727,11 +7346,6 @@
       } catch (e) { }
       return false;
     }
-
-    // ══════════════════════════════════════════════════
-    // 🔡 SUSUN KATA — Word Builder Game Engine
-    // Anak menyusun huruf acak menjadi kata yang benar
-    // ══════════════════════════════════════════════════
 
     const susunData = [
       // level mudah (2-3 huruf)
@@ -6771,13 +7385,13 @@
 
     // ── State ──
     let susunQueue = [], susunIdx = 0;
-    let susunCurrent = null;          // { emoji, word, hint }
-    let susunSlotState = [];          // string per slot, '' = kosong
-    let susunTileUsed = [];          // boolean per tile
+    let susunCurrent = null;
+    let susunSlotState = [];
+    let susunTileUsed = [];
     let susunBenarCount = 0, susunSalahCount = 0, susunPtsCount = 0;
     let susunLocked = false;
 
-    function shuffleArr(a) {          // sudah ada, tapi redeclare aman dgn var
+    function shuffleArr(a) {
       return [...a].sort(() => Math.random() - .5);
     }
 
@@ -6798,18 +7412,16 @@
       susunCurrent = susunQueue[susunIdx];
       susunLocked = false;
       const word = susunCurrent.word;
-      const letters = shuffleArr(word.split(''));   // huruf diacak
+      const letters = shuffleArr(word.split(''));
 
       susunSlotState = Array(word.length).fill('');
       susunTileUsed = Array(word.length).fill(false);
 
-      // Progress
       const pct = Math.round((susunIdx / susunQueue.length) * 100);
       document.getElementById('susunProgressFill').style.width = pct + '%';
       document.getElementById('susunProgressText').textContent =
         'Kata ' + (susunIdx + 1) + ' dari ' + susunQueue.length;
 
-      // Header
       document.getElementById('susunEmoji').textContent = susunCurrent.emoji;
       document.getElementById('susunHint').textContent = susunCurrent.hint;
       document.getElementById('susunQLabel').textContent =
@@ -6819,7 +7431,6 @@
       buildSusunTiles(letters);
       updateProgress('susun', susunIdx, susunQueue.length);
 
-      // Guru membacakan petunjuk setelah jeda kecil
       setTimeout(speakSusunClue, 500);
     }
 
@@ -6831,7 +7442,6 @@
         const slot = document.createElement('div');
         slot.className = 'susun-slot';
         slot.dataset.idx = i;
-        // Nomor urut kecil di sudut
         const num = document.createElement('span');
         num.className = 'susun-slot-idx'; num.textContent = i + 1;
         slot.appendChild(num);
@@ -6859,23 +7469,19 @@
       if (susunLocked) return;
       if (susunTileUsed[tileIdx]) return;
 
-      // Find first empty slot
       const emptyIdx = susunSlotState.findIndex(s => s === '');
-      if (emptyIdx === -1) return;   // semua slot penuh
+      if (emptyIdx === -1) return;
 
       susunSlotState[emptyIdx] = ch;
       susunTileUsed[tileIdx] = true;
       tileEl.classList.add('used');
 
-      // Render slot
       const slotEl = document.getElementById('susunSlots').children[emptyIdx];
       slotEl.classList.add('filled');
-      // Remove existing text node, keep num span
       while (slotEl.firstChild && slotEl.firstChild.nodeType === 3) {
         slotEl.removeChild(slotEl.firstChild);
       }
       slotEl.dataset.tileIdx = tileIdx;
-      // Prepend letter text
       slotEl.insertAdjacentText('afterbegin', ch);
 
       playSound('correct');
@@ -6892,16 +7498,13 @@
       );
 
       susunSlotState[slotIdx] = '';
-      // Restore slot visual
       const slotEl = document.getElementById('susunSlots').children[slotIdx];
       slotEl.classList.remove('filled', 'correct-flash', 'wrong-flash');
-      // Remove letter text node
       for (const node of [...slotEl.childNodes]) {
         if (node.nodeType === 3) slotEl.removeChild(node);
       }
       delete slotEl.dataset.tileIdx;
 
-      // Restore tile
       if (!isNaN(tileIdx)) {
         susunTileUsed[tileIdx] = false;
         document.getElementById('susunTiles').children[tileIdx].classList.remove('used');
@@ -6915,7 +7518,6 @@
       susunSlotState = Array(word.length).fill('');
       susunTileUsed = Array(word.length).fill(false);
 
-      // Reset slots visually
       const slots = document.getElementById('susunSlots').children;
       for (const sl of slots) {
         sl.classList.remove('filled', 'correct-flash', 'wrong-flash');
@@ -6924,7 +7526,6 @@
         }
         delete sl.dataset.tileIdx;
       }
-      // Reset tiles
       const tiles = document.getElementById('susunTiles').children;
       for (const t of tiles) t.classList.remove('used');
     }
@@ -6936,7 +7537,6 @@
       const word = susunCurrent.word;
 
       if (answer.length < word.length) {
-        // Belum semua slot terisi
         speakSequence([
           { t: 'Lengkapi dulu semua kotak ya!', r: 0.74, p: basePitch() + 0.05 },
         ], 100);
@@ -6948,7 +7548,6 @@
       const slots = document.getElementById('susunSlots').children;
 
       if (answer === word) {
-        // ✅ BENAR
         for (const sl of slots) sl.classList.add('correct-flash');
         playSound('correct');
         susunBenarCount++;
@@ -6979,7 +7578,6 @@
         setTimeout(() => { susunIdx++; renderSusunQuestion(); }, 1900);
 
       } else {
-        // ❌ SALAH — tunjukkan huruf mana yang salah
         for (let i = 0; i < word.length; i++) {
           const sl = slots[i];
           if (susunSlotState[i] === word[i]) {
@@ -7010,7 +7608,6 @@
           customClass: { popup: 'swal-kids' }, iconColor: '#ef4444', background: '#fef2f2',
         });
 
-        // Unlock setelah animasi selesai untuk coba lagi
         setTimeout(() => {
           susunLocked = false;
           for (const sl of slots) sl.classList.remove('correct-flash', 'wrong-flash');
@@ -7053,14 +7650,6 @@
         },
       ], 300);
     }
-
-    // ══════════════════════════════════════════════════
-    // 🔍 TEBAK KATA — LENGKAPI HURUF YANG HILANG
-    // Lanjutan dari Susun Kata, 40 soal, 3 level
-    // Level 1 (1-15): 1 huruf kosong (mudah)
-    // Level 2 (16-30): 2 huruf kosong (sedang)
-    // Level 3 (31-40): 2 huruf kosong + posisi acak (susah)
-    // ══════════════════════════════════════════════════
 
     const tebakWordBank = [
       // === LEVEL 1 (1 blank, mudah) ===
@@ -7114,8 +7703,8 @@
     let tebakQueue = [], tebakIdx = 0;
     let tebakBenarCount = 0, tebakSalahCount = 0, tebakPtsCount = 0;
     let tebakCurrent = null;
-    let tebakFilledMap = {};   // blankPosition → letter chosen
-    let tebakActiveBlank = -1; // which blank is currently active
+    let tebakFilledMap = {};
+    let tebakActiveBlank = -1;
     let tebakHintUsed = false;
     let tebakLocked = false;
 
@@ -7141,25 +7730,21 @@
       tebakFilledMap = {};
       tebakHintUsed = false;
       tebakLocked = false;
-      tebakActiveBlank = tebakCurrent.blanks[0]; // start at first blank
+      tebakActiveBlank = tebakCurrent.blanks[0];
 
-      // Level badge
       const lvl = tebakIdx < 15 ? '⭐ Level 1 — Mudah' : tebakIdx < 30 ? '⭐⭐ Level 2 — Sedang' : '⭐⭐⭐ Level 3 — Susah';
       document.getElementById('tebakLevelBadge').textContent = lvl;
 
-      // Progress
       const pct = (tebakIdx / tebakQueue.length) * 100;
       document.getElementById('tebakProgressFill').style.width = pct + '%';
       document.getElementById('tebakProgressText').textContent = `Soal ${tebakIdx + 1} dari ${tebakQueue.length}`;
 
-      // Header
       document.getElementById('tebakEmoji').textContent = tebakCurrent.emoji;
       document.getElementById('tebakHint').textContent = tebakCurrent.hint;
       const blanksCount = tebakCurrent.blanks.length;
       document.getElementById('tebakQLabel').textContent =
         blanksCount === 1 ? '🔍 Isi 1 huruf yang hilang!' : `🔍 Isi ${blanksCount} huruf yang hilang!`;
 
-      // Hide hint text
       const hintBox = document.getElementById('tebakHintText');
       hintBox.textContent = ''; hintBox.classList.remove('show');
 
@@ -7167,7 +7752,6 @@
       buildTebakBlankNav();
       buildTebakChoices();
 
-      // Speak after short delay
       setTimeout(speakTebakClue, 500);
     }
 
@@ -7188,7 +7772,6 @@
         box.dataset.idx = i;
 
         if (isBlank) {
-          // Number label on blank
           const num = document.createElement('span');
           num.className = 'tebak-blank-num';
           num.textContent = tebakCurrent.blanks.indexOf(i) + 1;
@@ -7204,7 +7787,7 @@
     function buildTebakBlankNav() {
       const nav = document.getElementById('tebakBlankNav');
       nav.innerHTML = '';
-      if (tebakCurrent.blanks.length <= 1) return; // only show for 2+ blanks
+      if (tebakCurrent.blanks.length <= 1) return;
 
       tebakCurrent.blanks.forEach((blankPos, di) => {
         const dot = document.createElement('button');
@@ -7229,12 +7812,10 @@
       const box = document.getElementById('tebakChoices');
       box.innerHTML = '';
 
-      // Generate choice pool: correct letters + distractors
       const correctLetters = tebakCurrent.blanks.map(i => tebakCurrent.word[i]);
       const allLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
       const distractors = shuffleArr(allLetters.filter(l => !correctLetters.includes(l)));
 
-      // Show correct + 4-6 distractors, total 6-8 tiles
       const extra = tebakCurrent.blanks.length === 1 ? 5 : 6;
       const pool = shuffleArr([...correctLetters, ...distractors.slice(0, extra)]);
 
@@ -7248,14 +7829,11 @@
       });
     }
 
-    // ── Place letter into active blank ──
     function placeTebakLetter(letter, tile) {
       if (tebakLocked || tebakActiveBlank < 0) return;
       if (tile.classList.contains('used') || tile.classList.contains('correct-used')) return;
 
-      // If active blank already filled, un-fill it first
       if (tebakFilledMap[tebakActiveBlank]) {
-        // Re-enable old tile if it was used
         const oldLetter = tebakFilledMap[tebakActiveBlank];
         document.querySelectorAll('.tebak-choice').forEach(t => {
           if (t.dataset.letter === oldLetter && t.classList.contains('used')) {
@@ -7267,14 +7845,12 @@
       tebakFilledMap[tebakActiveBlank] = letter;
       tile.classList.add('used');
 
-      // Move to next unfilled blank automatically
       const unfilled = tebakCurrent.blanks.filter(b => !tebakFilledMap[b]);
       if (unfilled.length > 0) tebakActiveBlank = unfilled[0];
 
       buildTebakWordDisplay();
       buildTebakBlankNav();
 
-      // If all blanks filled, auto-check after short delay
       if (tebakCurrent.blanks.every(b => tebakFilledMap[b])) {
         setTimeout(checkTebakAnswer, 600);
       }
@@ -7297,7 +7873,6 @@
     function showTebakHint() {
       tebakHintUsed = true;
       const hintBox = document.getElementById('tebakHintText');
-      // Reveal first letter of word as extra hint
       const firstBlank = tebakCurrent.blanks[0];
       const correctLetter = tebakCurrent.word[firstBlank];
       hintBox.textContent = `💡 Petunjuk: Huruf ke-${firstBlank + 1} dari kata ini adalah "${correctLetter}"`;
@@ -7309,7 +7884,6 @@
     function checkTebakAnswer() {
       if (tebakLocked) return;
 
-      // Make sure all blanks are filled
       const unfilled = tebakCurrent.blanks.filter(b => !tebakFilledMap[b]);
       if (unfilled.length > 0) {
         setActiveBlank(unfilled[0]);
@@ -7320,14 +7894,12 @@
       tebakLocked = true;
       let allCorrect = true;
 
-      // Check each blank
       tebakCurrent.blanks.forEach(pos => {
         const chosen = tebakFilledMap[pos];
         const correct = tebakCurrent.word[pos];
         const box = document.querySelector(`.tebak-letter.blank[data-idx="${pos}"]`);
         if (chosen === correct) {
           if (box) { box.classList.remove('active-blank', 'filled'); box.classList.add('correct-flash'); }
-          // Mark tile correct
           document.querySelectorAll('.tebak-choice').forEach(t => {
             if (t.dataset.letter === chosen && t.classList.contains('used')) t.classList.add('correct-used');
           });
@@ -7360,7 +7932,6 @@
         tebakSalahCount++;
         document.getElementById('tebakSalah').textContent = tebakSalahCount;
         playSound('wrong');
-        // Show correct answer on blanks
         const correctWord = tebakCurrent.word;
         setTimeout(() => {
           tebakCurrent.blanks.forEach(pos => {
@@ -7405,7 +7976,6 @@
     }
 
     window.addEventListener('load', function () {
-      // Set initial header height variable
       function updateHeaderHeight() {
         const headerEl = document.querySelector('header');
         const scoreBarEl = document.querySelector('.score-bar');
@@ -7418,10 +7988,8 @@
       loadVoices();
       buildWarna();
       checkSavedLogin();
-      // Render progress setelah semua DOM siap
       setTimeout(renderAllProgressCards, 300);
 
-      // ── Welcome modal setelah login/load ──
       setTimeout(function () {
         if (typeof Swal !== 'undefined' && currentUser) {
           var firstName = currentUser.name ? currentUser.name.split(' ')[0] : 'Teman';
@@ -7462,7 +8030,6 @@
       }, 1200);
     });
 
-    // ── Global SweetAlert2 siap digunakan di seluruh aplikasi ──
   </script>
 </body>
 
